@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-
+require 'pry'
 require_relative "../lib/user.rb"
 require_relative "../lib/teacher.rb"
 require_relative "../lib/student.rb"
@@ -8,13 +8,28 @@ steve = Student.new
 steve.first_name = "Steve"
 steve.last_name = "Jobs"
 
+jim = User.new
+jim.first_name = "Jim"
+jim.last_name = "Johnson"
+
 avi = Teacher.new
 avi.first_name = "Avi"
 avi.last_name = "Flombaum"
 
+def school(student, teacher)
+    if student.knowledge.uniq.sort != teacher.knowledge.sort
+    student.learn(teacher.teach)
+    school(student, teacher)
+    else
+    student.knowledge.length
+    end
+end
+# binding.pry
+# some_knowledge = avi.teach 
 
-some_knowledge = avi.teach 
+# steve.learn(some_knowledge)
 
-steve.learn(some_knowledge)
+# puts "Steve just learned this important knowledge: '#{steve.knowledge.first}' from Avi"
+# school(steve, avi)
 
-puts "Steve just learned this important knowledge: '#{steve.knowledge.first}' from Avi"
+school(steve,avi)
